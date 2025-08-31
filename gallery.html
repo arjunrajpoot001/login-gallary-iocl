@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Photo Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="indian-oil-logo (1).png" height="50" width="50" alt="E-IOCL">
+                <span class="logo-text">E-IOCL GALLERY</span>
+            </div>
+            <div class="user-info">
+                <span class="user-initials">AR</span>
+                <span class="user-name">ARJUN RAJPUT</span>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>MATHURA REFINERY</h2>
+                <button class="close-btn">×</button>
+            </div>
+            <div class="year-folders">
+                <div class="folder" id="folder-2024">
+                    <span class="folder-icon">📁</span>
+                    <span class="folder-name">2024</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search photos...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="gallery-actions">
+                    <button class="upload-btn" id="uploadBtn">📤 Upload</button>
+                    <button class="slideshow-btn" id="slideshowBtn">🎬 Slideshow</button>
+                    <button class="download-btn" id="downloadBtn">⬇️ Download Selected</button>
+                </div>
+                <div class="view-controls">
+                    <button class="view-btn" data-view="grid">⊞</button>
+                    <button class="view-btn active" data-view="large-grid">⊡</button>
+                    <button class="view-btn" data-view="list">☰</button>
+                    <button class="sort-btn" id="sortBtn">🔄 Sort</button>
+                    <button class="filter-btn">🔽</button>
+                </div>
+            </div>
+            
+            <!-- Upload Modal -->
+            <div id="uploadModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Upload Photos</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="upload-area" id="uploadArea">
+                        <p>Drag and drop images here or click to select</p>
+                        <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <div class="upload-progress" id="uploadProgress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span id="progressText">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slideshow Modal -->
+            <div id="slideshowModal" class="modal slideshow-modal">
+                <div class="slideshow-container">
+                    <button class="close-slideshow">&times;</button>
+                    <img id="slideshowImage" src="" alt="">
+                    <div class="slideshow-controls">
+                        <button id="prevSlide">❮</button>
+                        <button id="playPause">⏸️</button>
+                        <button id="nextSlide">❯</button>
+                    </div>
+                    <div class="slideshow-info">
+                        <span id="slideCount">1 / 8</span>
+                        <span id="slideTitle">Photo Title</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sort Options -->
+            <div id="sortOptions" class="dropdown-menu">
+                <div class="dropdown-item" data-sort="name">📝 Name</div>
+                <div class="dropdown-item" data-sort="date">📅 Date</div>
+                <div class="dropdown-item" data-sort="size">📏 Size</div>
+                <div class="dropdown-item" data-sort="type">🏷️ Type</div>
+            </div>
+
+            <div class="gallery-stats">
+                <span id="photoCount">0 photos</span>
+                <span id="selectedCount" style="display: none;">0 selected</span>
+            </div>
+            
+            <div class="gallery-grid" id="gallery">
+                <!-- Photos will be populated by JavaScript -->
+            </div>
+            
+            <div class="gallery-footer">
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Folder navigation
+        folderButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            folderButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            currentPhotos = [...photos];
+            currentPage = 1;
+            renderPhotos();
+          });
+        });
+      </script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Gallery Login Page</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('iocl12.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* CSS Cartoon Character */
+        .man {
+            position: absolute;
+            width: 175px;
+            height: 350px;
+            bottom: 30%;
+            left: -80px;
+            animation: walkToLogin 5s ease-in-out forwards;
+            z-index: 10;
+        }
+
+        .character {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Head */
+        .head {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: #ffdbac;
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid #333;
+        }
+
+        .head::before {
+            content: '😊';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 45px;
+        }
+
+        /* Body */
+        .body {
+            position: absolute;
+            width: 55px;
+            height: 120px;
+            background: #4169e1;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+            border: 4px solid #333;
+        }
+
+        /* Arms */
+        .arms {
+            position: absolute;
+            top: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .arm {
+            position: absolute;
+            width: 8px;
+            height: 70px;
+            background: #ffdbac;
+            border-radius: 4px;
+            border: 2px solid #333;
+            transform-origin: top center;
+        }
+
+        .left-arm {
+            left: -40px;
+            animation: armSwingL 0.6s ease-in-out infinite alternate;
+        }
+
+        .right-arm {
+            right: -40px;
+            animation: armSwingR 0.6s ease-in-out infinite alternate;
+        }
+
+        /* Legs */
+        .legs {
+            position: absolute;
+            top: 210px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .leg {
+            position: absolute;
+            width: 10px;
+            height: 90px;
+            background: #ffdbac;
+            border-radius: 4px;
+            border: 2px solid #333;
+            transform-origin: top center;
+        }
+
+        .left-leg {
+            left: -22px;
+            animation: legWalkL 0.6s ease-in-out infinite alternate;
+        }
+
+        .right-leg {
+            right: -22px;
+            animation: legWalkR 0.6s ease-in-out infinite alternate;
+        }
+
+        /* Login Box */
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 350px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .login-box h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .login-box input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        .credentials-hint {
+            margin-top: 20px;
+            color: #666;
+            font-size: 12px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* Animations */
+        @keyframes walkToLogin {
+            0% {
+                left: -80px;
+            }
+
+            80% {
+                left: calc(50% + 200px);
+            }
+
+            100% {
+                left: calc(50% + 200px);
+            }
+        }
+
+        @keyframes armSwingL {
+            0% {
+                transform: rotate(-20deg);
+            }
+
+            100% {
+                transform: rotate(20deg);
+            }
+        }
+
+        @keyframes armSwingR {
+            0% {
+                transform: rotate(20deg);
+            }
+
+            100% {
+                transform: rotate(-20deg);
+            }
+        }
+
+        @keyframes legWalkL {
+            0% {
+                transform: rotate(-30deg);
+            }
+
+            100% {
+                transform: rotate(30deg);
+            }
+        }
+
+        @keyframes legWalkR {
+            0% {
+                transform: rotate(30deg);
+            }
+
+            100% {
+                transform: rotate(-30deg);
+            }
+        }
+
+        /* Background decorations */
+        .container::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: 15%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-box {
+                width: 90%;
+                max-width: 350px;
+                padding: 30px;
+            }
+
+            .man {
+                width: 50px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Animated cartoon man -->
+        <div class="man" id="cartoonMan">
+            <div class="character">
+                <!-- Simple CSS cartoon character -->
+                <div class="head"></div>
+                <div class="body"></div>
+                <div class="legs">
+                    <div class="leg left-leg"></div>
+                    <div class="leg right-leg"></div>
+                </div>
+                <div class="arms">
+                    <div class="arm left-arm"></div>
+                    <div class="arm right-arm"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login form -->
+        <div class="login-box" id="loginBox">
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                <img src="indian-oil-logo (1).png" alt="IOCL Logo"
+                    style="width: 50px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 12px; background: #fff;">
+                <h1 style="margin: 0; color: #667eea; letter-spacing: 2px; font-size: 1.7em;">E-IOCL GALLERY</h1>
+            </div>
+            <h2>Login</h2>
+            <div class="input-group">
+                <input type="text" placeholder="Username" id="username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" id="password" required>
+            </div>
+            <button onclick="login()" class="login-btn">Login</button>
+        </div>
+    </div>
+    <script>
+        // Wait for page to load
+        window.addEventListener('load', function () {
+            // Animate the cartoon man walking toward login box
+            const cartoonMan = document.getElementById('cartoonMan');
+            const loginBox = document.getElementById('loginBox');
+
+            // After 5 seconds (when walk animation completes), show login box
+            setTimeout(() => {
+                loginBox.style.opacity = '1';
+                loginBox.style.transform = 'translate(-50%, -50%) scale(1)';
+                // Stop walking animation and set static position
+                cartoonMan.style.animation = 'none';
+                cartoonMan.style.left = 'calc(50% + 200px)';
+                cartoonMan.classList.add('standing');
+            }, 5000);
+        });
+
+        // Login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === "ARJUN RAJPUT" && password === "12345678") {
+                // Redirect to the gallery page
+                window.location.href = "gallery.html";
+            } else {
+
+                alert('Incorrect username or password. Please try again.');
+                // Clear the fields
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
